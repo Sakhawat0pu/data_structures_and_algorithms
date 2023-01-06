@@ -79,20 +79,21 @@ class Linked_list:
             raise RuntimeError("Cannot remove from an empty collection!!")
         else:
             if len(self) == 1:
-                return self.add_first()
+                return self.remove_first()
             else:
                 item = self._tail._item
                 tail = self._head
                 while tail._next._next is not None:
                     tail = tail._next
                 self._tail = tail
+                self._tail._next = None
                 self._length -= 1
                 return item
 
 
 if __name__ == "__main__":
     n = 10
-    if len(sys.argv) >= 2:
+    if len(sys.argv):
         n = int(sys.argv[1])
         
     ll = Linked_list()
@@ -107,4 +108,12 @@ if __name__ == "__main__":
                                     # By adding first and removing last or by adding last and removing first in LL, we can implement Queue in LL
     
             
+    ll1 = Linked_list()
+    for i in range(n):
+        ll1.add_first(i)
+    for i in range(n):
+        assert len(ll1) == n - i
+        ll1.remove_last()
+    print()
+    print("Queue is also working...")
     
