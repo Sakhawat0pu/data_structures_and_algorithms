@@ -113,13 +113,21 @@ class Doubly_linked_list:
     
     def insert_item(self, index, item):
         temp = self.get_item(index)
-        if temp:
-            before_temp = temp._prev
-            new_node = Node(item, before_temp, temp)
-            before_temp._next = new_node
-            temp._prev = new_node
-            self._length += 1
+        if index == 0:
+            self.add_first(item)
             return True
+        elif index == (len(self)-1):
+            self.add_last(item)
+            return True
+        else:
+            if temp:
+                before_temp = temp._prev
+                new_node = Node(item, before_temp, temp)
+                before_temp._next = new_node
+                temp._prev = new_node
+                self._length += 1
+                return True
+            return False
         return False
     
     def remove_item(self, index):
@@ -213,7 +221,11 @@ if __name__ == "__main__":
     dll_2.remove_item(5)
     print(dll_2)
     print()
-    dll_2.insert_item(11, 12)
+    dll_2.insert_item(0, 0)
+    dll_2.insert_item(len(dll_2)-1, len(dll_2))
+    print(dll_2)
+    print()
+    dll_2.insert_item(12, 12)
     print(dll_2)
     dll_2.reverse()
     print(dll_2)
