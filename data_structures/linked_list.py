@@ -140,6 +140,20 @@ class Linked_list:
             pre._next = None
             self._length -= 1
             return item
+    
+    def reverse(self):
+        temp = self._tail           #self._head ---> first_node->second_node->......->last_node <----self._tail
+        self._tail = self._head
+        self._head = temp
+        temp = self._tail           #self._tail ---> first_node->second_node->......->last_node <----self._head 
+        before_temp = None
+        after_temp = temp._next
+        for _ in range(len(self)):
+            after_temp = temp._next
+            temp._next = before_temp
+            before_temp = temp
+            temp = after_temp
+            
         
 if __name__ == "__main__":
     n = 10
@@ -179,3 +193,12 @@ if __name__ == "__main__":
     ll.insert_item(6, 101)
     print(ll)
     print(ll.remove_item(6))
+    
+    ll3 = Linked_list()
+    for i in range(n):
+        ll3.add_last(i)
+    
+    print()
+    print("ll3: ", ll3)
+    ll3.reverse()
+    print("Reversed ll3: ", ll3)
