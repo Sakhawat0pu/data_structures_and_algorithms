@@ -65,7 +65,7 @@ class Doubly_linked_list:
     def remove_first(self):
         item = None
         if len(self) == 0:
-            raise RuntimeError("Cannot remove item from an empty codllection!!")
+            raise RuntimeError("Cannot remove item from an empty collection!!")
         elif len(self) == 1:
             item = self._head._item
             self._head = self._tail = None

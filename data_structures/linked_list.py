@@ -170,7 +170,6 @@ if __name__ == "__main__":
         ll.remove_first()
     print("Stack is working...")    # By adding first and removing first or by adding last and removing last in LL, we can implement Stack in LL
                                     # By adding first and removing last or by adding last and removing first in LL, we can implement Queue in LL
-    
             
     ll1 = Linked_list()
     for i in range(n):
@@ -180,6 +179,9 @@ if __name__ == "__main__":
         ll1.remove_last()
     print()
     print("Queue is also working...")
+    
+    # Stack and Queue can be implemented using linked list. Since add_first, add_last and remove_first method takes O(1) time, we can use 
+    # add_first and remove_first methods for Stack and add_last and remove_first methods for Queue 
     
     print()
     for i in range(n):
