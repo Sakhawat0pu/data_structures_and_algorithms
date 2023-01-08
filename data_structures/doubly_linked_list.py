@@ -90,7 +90,57 @@ class Doubly_linked_list:
             temp._prev = None
         self._length -= 1
         return item
+
+    def get_item(self, index):                          # Returns the node at the index not the item at that index
+        temp = self._head
+        if index < 0 or index >= len(self):
+            raise IndexError("index out of range!!")
+        elif index < (len(self) / 2):
+            for _ in range(index):
+                temp = temp._next
+        else:
+            temp = self._tail
+            for _ in range(len(self) - index - 1):
+                temp = temp._prev
+        return temp
     
+    def set_item(self, index, item):
+        temp = self.get_item(index)
+        if temp:
+            temp._item = item
+            return True
+        return False
+    
+    def insert_item(self, index, item):
+        temp = self.get_item(index)
+        if temp:
+            before_temp = temp._prev
+            new_node = Node(item, before_temp, temp)
+            before_temp._next = new_node
+            temp._prev = new_node
+            self._length += 1
+    
+    def remove_item(self, index):
+
+        if index < 0 or index >= len(self):
+            raise IndexError("index out of range!!")
+        elif index == 0:
+            return self.remove_first()
+        elif index == (len(self) - 1):
+            return self.remove_last()
+        else:
+            temp = self.get_item(index)
+            item = None
+            if temp:
+                item = temp._item
+                before_temp = temp._prev
+                after_temp = temp._next
+                before_temp._next = after_temp
+                after_temp._prev = before_temp
+            
+            self._length -= 1
+            return item
+            
     
 if __name__ == "__main__":
     n = 10
@@ -118,3 +168,28 @@ if __name__ == "__main__":
         dll_1.remove_last()
     
     print("Queue is also working...")
+    print()
+    
+    dll_2 = Doubly_linked_list()
+    for i in range(n):
+        dll_2.add_last(i)
+    print(dll_2)
+    print(dll_2.remove_first())
+    print(dll_2.remove_last())
+    print(dll_2)
+    print()
+    
+    node = dll_2.get_item(11)
+    print(node._item)
+    assert dll_2.set_item(11, 100) == True
+    print("100 was set at index 11")
+    print(dll_2)
+    print()
+    
+    dll_2.insert_item(5, 99)
+    print(dll_2)
+    print()
+    
+    dll_2.remove_item(5)
+    print(dll_2)
+    print()

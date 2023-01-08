@@ -128,7 +128,7 @@ class Linked_list:
             raise IndexError("Index out of range!!")
         elif (index == 0):
             self.remove_first()
-        elif (index == len(self)):
+        elif (index == (len(self)-1)):
             self.remove_last()
         else:
             temp = self._head
