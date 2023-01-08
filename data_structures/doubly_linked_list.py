@@ -119,6 +119,8 @@ class Doubly_linked_list:
             before_temp._next = new_node
             temp._prev = new_node
             self._length += 1
+            return True
+        return False
     
     def remove_item(self, index):
 
@@ -140,8 +142,25 @@ class Doubly_linked_list:
             
             self._length -= 1
             return item
-            
-    
+        
+    def reverse(self, mid = None):
+        if (len(self) % 2) == 0:
+            mid = int(len(self) / 2)
+            is_inserted = self.insert_item(mid, 0)
+            if is_inserted:
+                self.reverse(mid)    
+        else:
+            first = self._head
+            last = self._tail
+            while first != last:
+                first._item, last._item = last._item, first._item
+                first = first._next
+                last = last._prev
+
+            if mid:
+                self.remove_item(mid)
+            return
+        
 if __name__ == "__main__":
     n = 10
     if len(sys.argv):
@@ -180,6 +199,7 @@ if __name__ == "__main__":
     print()
     
     node = dll_2.get_item(11)
+
     print(node._item)
     assert dll_2.set_item(11, 100) == True
     print("100 was set at index 11")
@@ -193,3 +213,7 @@ if __name__ == "__main__":
     dll_2.remove_item(5)
     print(dll_2)
     print()
+    dll_2.insert_item(11, 12)
+    print(dll_2)
+    dll_2.reverse()
+    print(dll_2)
