@@ -44,10 +44,10 @@ class BSTNode:
             return self
         elif self.key > key:
             if self.left:
-                self.left.get(key)
+                return self.left.get(key)
         elif self.key < key:
             if self.right:
-                self.right.get(key)
+                return self.right.get(key)
         else:
             raise KeyError(f"Key {self.key} is not in the BST.")
     
@@ -67,6 +67,7 @@ class BSTNode:
                 parent.left = new
             else:
                 parent.right = new
+        return new
     
     # rotate a node to the right if the left subtree is heavier than the right subtree
     def rotate_right(self, parent):
@@ -83,8 +84,9 @@ class BSTNode:
                 parent.left = new
             else:
                 parent.right = new
-                
-    def floor(self, key):
+        return new
+    
+    def floor(self, key):   # find a value that is equal to key or the largest value in the BST that is less than key
         if self.key == key:
             return self
         elif self.key > key:
@@ -102,7 +104,7 @@ class BSTNode:
             else:
                 return self
 
-    def ceil(self, key):
+    def ceil(self, key):    # find a value that is equal to key or the smallest value in the BST that is greater than key
         if key == self.key:
             return self
         elif key < self.key:
@@ -187,5 +189,4 @@ if __name__ == "__main__":
     for pair in pairs:
         print(pair[0], pair[1])
         tree.put(pair[0], pair[1])
-        
     print(tree.print_subtree())
