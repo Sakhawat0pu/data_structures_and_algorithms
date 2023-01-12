@@ -44,7 +44,7 @@ if __name__ == "__main__":
     s = BSTMap()
     for i in [2, 1, 3, 4, 5]:
         s.put(i, str(i))
-        # print(s)
+        print(s)
     for i in range(1, 6):
         assert s.get(i) == str(i)
 
