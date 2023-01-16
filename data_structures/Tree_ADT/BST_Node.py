@@ -39,6 +39,41 @@ class BSTNode:
                 return self.rotate_right(parent)
         return self
     
+    def delete_key(self, key):
+        if self is None:
+            raise KeyError(f"{key} does not exist in the BST")
+        elif key < self.key:
+            if self.left:
+                self.left = self.left.delete_key(key)
+            else:
+                raise KeyError(f"{key} does not exist in the BST")
+        elif key > self.key:
+            if self.right:
+                self.right = self.right.delete_key(key)
+            else:
+                raise KeyError(f"{key} does not exist in the BST")
+        else:
+            if self.left == None and self.right == None:
+                self = None
+            elif self.left == None:
+                self = self.right
+            elif self.right == None:
+                self = self.left
+            else:
+                right_subtree_min = self.right.min_key()
+                self.key = right_subtree_min[0]
+                self.value = right_subtree_min[1]
+                self.right.delete_key(right_subtree_min[0])
+                
+        return self
+    
+    def min_key(self):
+        current_node = self
+        while current_node.left is not None:
+            current_node = current_node.left
+        return [current_node.key, current_node.value]
+    
+    
     def get(self, key):
         if self.key == key:
             return self
@@ -189,4 +224,12 @@ if __name__ == "__main__":
     for pair in pairs:
         print(pair[0], pair[1])
         tree.put(pair[0], pair[1])
+    print(tree.print_subtree())
+    
+    tree.delete_key(7)
+    print()
+    print(tree.print_subtree())
+    
+    tree.delete_key(5)
+    print()
     print(tree.print_subtree())
