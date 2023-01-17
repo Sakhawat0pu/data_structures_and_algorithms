@@ -30,10 +30,6 @@ def partition1(L, left, right):
         pivot = i
     return pivot
 
-lst1 = [6, 3, 0, 1, 5, 2, 4]
-lst2 = [4, 0, 1, 5, 2, 6, 3]
-
-print(quick_sort1(lst1))
 
 def quick_sort2(L, left = 0, right = None):
     if right is None:
@@ -56,8 +52,6 @@ def partition2(L, left, right):
     pivot = swap
     return pivot
 
-print(quick_sort2(lst2))
-
 
 def randomized_quick_sort(L, left = 0, right = None):
     if right is None:
@@ -75,5 +69,11 @@ def randomized_partition(L, left, right):
     L[rand_pivot], L[right] = L[right], L[rand_pivot]
     return partition1(L, left, right)                       # calls the partition1 function
 
+
+lst1 = [6, 3, 0, 1, 5, 2, 4]
+lst2 = [4, 0, 1, 5, 2, 6, 3]
 lst3 = [2, 5, 1, 6, 3, 4, 0]
+
+print(quick_sort1(lst1))
+print(quick_sort2(lst2))
 print(randomized_quick_sort(lst3))
