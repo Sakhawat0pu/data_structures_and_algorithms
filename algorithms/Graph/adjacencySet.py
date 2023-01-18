@@ -1,4 +1,4 @@
-class AdjacencyList:
+class AdjacencySet:
     def __init__(self, V = (), E = ()):
         self._vertex = set()
         self._neighbors = {}
@@ -48,7 +48,7 @@ class AdjacencyList:
     def __iter__(self):
         return iter(self._vertex)
     
-class Graph(AdjacencyList):
+class Graph(AdjacencySet):
     def __init__(self, V, E):
         super().__init__(V, E)
         
