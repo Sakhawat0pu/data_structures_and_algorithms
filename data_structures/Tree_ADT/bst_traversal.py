@@ -22,7 +22,7 @@ class BSTNode:
     def __iter__(self):
         return BST_iterator(self)
     
-    # generator based iteration (good)
+    # generator based iteration (good) (ir_order, pre_order, post_order they are all dfs algorithm)
     def in_order(self):
         if self._left: yield from self._left.in_order()         # recursively go left
         yield self._key
@@ -37,6 +37,46 @@ class BSTNode:
         if self._left: yield from self._left.in_order()
         if self._right: yield from self._right.in_order()
         yield self._key
+    
+    
+    def bfs_traversal(self):
+        queue = [self]
+        result = []
+        
+        while len(queue) > 0:
+            current_node = queue.pop(0)
+            result.append(current_node._key)
+            if current_node._left: queue.append(current_node._left)
+            if current_node._right: queue.append(current_node._right)
+        
+        return result
+    
+    def dfs_pre_ord(self):
+        result = []
+        def traverse(current_node):
+            result.append(current_node._key)
+            if current_node._left: traverse(current_node._left)
+            if current_node._right: traverse(current_node._right)
+        traverse(self)
+        return result
+    
+    def dfs_in_ord(self):
+        result = []
+        def traverse(current_node):
+            if current_node._left: traverse(current_node._left)
+            result.append(current_node._key)
+            if current_node._right: traverse(current_node._right)
+        traverse(self)
+        return result   
+    
+    def dfs_post_ord(self):
+        result = []
+        def traverse(current_node):
+            if current_node._left: traverse(current_node._left)
+            if current_node._right: traverse(current_node._right)
+            result.append(current_node._key)
+        traverse(self)
+        return result    
     
     # Freebie! This will help you print out useful info on nodes, if you want
     def __repr__(self):
@@ -83,3 +123,14 @@ if __name__ == "__main__":
         post_ord.append(item)
     print("POST-ORDER")
     print(post_ord)
+
+    print("BFS")
+    print(tree.bfs_traversal())
+    
+    print("DFS-PRE-ORDER")
+    print(tree.dfs_pre_ord())
+    print("DFS-IN-ORDER")
+    print(tree.dfs_in_ord())
+    print("DFS-POST-ORDER")
+    print(tree.dfs_post_ord())
+    
